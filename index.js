@@ -22,17 +22,17 @@ app.use(passport.initialize());
 
 const localAuthMiddleWare=passport.authenticate('local',{session:false})
 
-app.post('/', localAuthMiddleWare, function(req,res){
+app.post('/', function(req,res){
     res.send("Welcome to my hotel.... How can i help you? , we have list of menus")
     
 })
 
 
 const personRoutes=require("./routes/personRoutes")
-app.use("/person",personRoutes)
+app.use("/person",localAuthMiddleWare,  personRoutes)
 
 const menuRoutes=require("./routes/menuRoutes")
-app.use("/menu",localAuthMiddleWare,menuRoutes)
+app.use("/menu",menuRoutes)
 
 //give port to run
  app.listen(3000,()=>{

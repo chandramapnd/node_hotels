@@ -51,17 +51,19 @@ router.post('/', async(req,res)=>{
         })
         
     } catch (error) {
+        console.error("FULL ERROR:", error);   
+
         res.status(500).json({
-            message:"Server Error",
-            error
-        })
+            message: "Server Error",
+            error: error.message   
+        });
     }
 
  });
 
 router.put("/:id",async(req,res)=>
 {
-    try{
+    try{ 
         const personId=req.params.id;
         const updatedData=req.body;
 
